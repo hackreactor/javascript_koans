@@ -75,8 +75,7 @@ describe("About Applying What We Have Learnt", function() {
   });
 
   it("should add all the natural numbers below 1000 that are multiples of 3 or 5 (functional)", function () {
-    numbers = _.range(0, 1000)
-    var sum = _(numbers).chain()
+    var sum = _(_.range(0, 1000)).chain()
 	  .filter(function (x) {return x % 5 === 0 || x % 3 === 0})
 	  .reduce(function (memo, x) {return memo + x}, 0)
 	  .value()
@@ -102,26 +101,43 @@ describe("About Applying What We Have Learnt", function() {
     var ingredientCount = 
 
     /* chain() together map(), flatten() and reduce() */
-   _(products).chain()
-	  .map(function(name) {
-	    console.log("Trying to return ingredient values only:" + name.ingredients);
+    _(products).chain()
+	  .map(function(name) { 
 		return name.ingredients;})
 	  .flatten()
 	  .reduce(function(ingredientCount, i) {
 		  ingredientCount[i] = (ingredientCount[i] || 0) + 1;
-		  console.log(ingredientCount);
 		  return ingredientCount}, {}).value();
 
     expect(ingredientCount['mushrooms']).toBe(2);
   });
 
-  /*********************************************************************************/
+/*********************************************************************************/
   /* UNCOMMENT FOR EXTRA CREDIT */
-  /*
+
+/* Extra Credit 1 */  
   it("should find the largest prime factor of a composite number", function () {
-  
+    //Should factorize to 2^2x3x13
+	var factorThis = _([156]).chain() 
+	  .reduce(function (factorThis, n) {
+		console.log("Trying to factor " + factorThis[n]);
+	    var d = 2; //divisor for factoring
+		while (factorThis[n] > 1) {
+		  while (factorThis[n]%d===0) {
+		    factorThis.push(d); 
+		    factorThis[n] = factorThis[n] / d;
+			console.log("Factors added: " + factorThis[n] + ", " + d);
+		  }
+	      d = d + 1;
+		}
+	    console.log(factorThis);
+	    return factorThis;
+	  }).value();
+  expect(factorThis[-1]).toBe(13);
   });
 
+
+  /*
   it("should find the largest palindrome made from the product of two 3 digit numbers", function () {
     
   });
