@@ -91,6 +91,9 @@ describe("About Applying What We Have Learnt", function() {
     }
 
     expect(ingredientCount['mushrooms']).toBe(2);
+	
+	var array = [];
+	//console.log(array);
   });
 
   it("should count the ingredient occurrence (functional)", function () {
@@ -108,9 +111,52 @@ describe("About Applying What We Have Learnt", function() {
 
   /*********************************************************************************/
   /* UNCOMMENT FOR EXTRA CREDIT */
-  /*
   it("should find the largest prime factor of a composite number", function () {
 	
+	
+	var primeNumbers = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 
+						53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 
+						109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 
+						173, 179, 181, 191, 193, 197, 199];
+	
+	var isPrime = function(n){
+		var primeNumber = true;
+		for(var i = 2; i <= Math.ceil(Math.sqrt(n)); i++){
+			if(n % i == 0){
+				primeNumber = false;
+			}
+		}
+		return primeNumber;
+	};
+	
+	var primeFactor = [];
+	
+	var findFactor = function(n){		
+		var i = 0;
+		var found = false;		
+		
+		while(!found){
+			if(n % primeNumbers[i] == 0){
+				var p1 = primeNumbers[i];				
+				var p2 = n / primeNumbers[i];
+				
+				if(isPrime(p2)){				
+					primeFactor.push(p1);
+					primeFactor.push(p2);
+					found = true;
+				}else{
+					primeFactor.push(p1);
+					findFactor(p2);
+					found = true;
+				}				
+			}
+			i++;
+		}
+		return primeFactor;
+	};
+	findFactor(75);
+	console.log(primeFactor);
+	//expect(findFactor(75)).toBe([3,5,5]);
   });
 
   it("should find the largest palindrome made from the product of two 3 digit numbers", function () {
@@ -131,4 +177,3 @@ describe("About Applying What We Have Learnt", function() {
   });
   
 });
-*/
