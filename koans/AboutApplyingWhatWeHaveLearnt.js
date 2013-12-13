@@ -41,7 +41,16 @@ describe("About Applying What We Have Learnt", function() {
 
       /* solve using filter() & all() / any() */
 
-      expect(productsICanEat.length).toBe(FILL_ME_IN);
+      productsICanEat = products.filter(function(product){
+        if(product.containsNuts || product.ingredients.contains('mushrooms')){
+          return false;
+        } else {
+          return true;
+        }
+      });
+
+
+      expect(productsICanEat.length).toBe(1);
   });
 
   /*********************************************************************************/
