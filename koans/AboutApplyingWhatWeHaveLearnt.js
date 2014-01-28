@@ -107,26 +107,184 @@ describe("About Applying What We Have Learnt", function() {
 
   /*********************************************************************************/
   /* UNCOMMENT FOR EXTRA CREDIT */
-  /*
-  it("should find the largest prime factor of a composite number", function () {
   
+  it("should find the largest prime factor of a composite number", function () {
+    
+    function isPrime(num){
+      var noOfFactors = 2;
+      num = parseInt(num);
+      for(var i = 2; i < num; i++){
+        if(num % i == 0){
+          noOfFactors++;
+        }
+      }
+
+      return (noOfFactors === 2);
+    }
+
+    function largestPrimeFactorOf(x){
+      var composite = parseInt(x);
+
+      var largestPrime = 1;
+
+      for(var i = 2; i < composite; i++){
+        if(composite % i === 0 && isPrime(i)){
+          largestPrime = i;
+        }
+      }
+
+      return largestPrime;
+
+    }
+
+    expect(largestPrimeFactorOf(42)).toBe(7);
   });
 
+  /*
   it("should find the largest palindrome made from the product of two 3 digit numbers", function () {
     
   });
+  */
 
   it("should find the smallest number divisible by each of the numbers 1 to 20", function () {
       
+      //a simple function to check if a number is Prime or not.
+      function isPrime(num){
+        num = Math.floor( Math.abs(num) );
+        if(num < 2){
+          return false;
+        }
+
+        var noOfFactors = 2;
+        num = parseInt(num);
+        for(var i = 2; i < num; i++){
+          if(num % i == 0){
+            noOfFactors++;
+          }
+        }
+
+        return (noOfFactors === 2);
+      }
+
+      function largestPrimeFactorOf(x){
+        var composite = parseInt(x);
+
+        var largestPrime = 1;
+
+        for(var i = 2; i < composite; i++){
+          if(composite % i === 0 && isPrime(i)){
+            largestPrime = i;
+          }
+        }
+
+        return largestPrime;
+
+      }
+
+      //a function that should return an array of prime factors of a number
+      
+      function factorize(num){
+        num = parseInt(num);
+
+        if(isPrime(num) || num < 2){
+          return [num];
+        } else {
+
+          return _([
+            largestPrimeFactorOf(num),
+            factorize(num/largestPrimeFactorOf(num))
+          ]).flatten();
+
+        }
+
+      }
+
+      var arr = _(_.range(20)).map(function(num){return factorize(num+1);});
+
+      //var lcm = _(arr).reduce(function(product, ){})
+      
+      // This function leaves extra 1's in place as those don't really matter.
+      function unionWithRepeats(arr1, arr2){
+        var arr = [];
+
+        arr1.forEach(function(num, index){
+          arr1[index] = 1;
+          if(arr2.indexOf(num) !== -1){
+            arr2[arr2.indexOf(num)] = 1;
+          }
+          arr.push(num);
+        });
+
+        var result = _([
+          arr,
+          arr2
+        ]).flatten();
+
+        return _(result).filter(function(el){ return el !== 1; });
+      }
+
+      //array of the union of prime factors. The elements of this multiplied will give us the LCM.
+      var prod = _.reduce(arr, unionWithRepeats, [1, 1]);
+
+      var lcm = _.reduce(prod, function(a,b){ return a * b; }, 1);
+
+      expect( lcm ).toBe(232792560);
     
   });
 
+  
   it("should find the difference between the sum of the squares and the square of the sums", function () {
     
+    function square(num){
+      return num * num;
+    }    
+
+    function squareDifference(a, b){
+      return Math.abs(
+        ( square(a) + square(b) ) -
+        square(a+b)
+      );
+    }
+
+    expect(squareDifference(3, 2)).toBe(12);
+
   });
 
+  //This works, but it's too slow to be of any use.
   it("should find the 10001st prime", function () {
 
+    function isPrime(num){
+      num = Math.floor( Math.abs(num) );
+      if(num < 2){
+        return false;
+      }
+
+      var noOfFactors = 2;
+      num = parseInt(num);
+      for(var i = 2; i < num; i++){
+        if(num % i == 0){
+          noOfFactors++;
+        }
+      }
+
+      return (noOfFactors === 2);
+    }
+
+    var count = 0;
+    var result;
+
+    for(var i = 2; true; i++){
+      if(isPrime(i)){
+        count++;
+      }
+      if(count >= 10001){
+        result = i;
+        break;
+      }
+    }
+
+    expect(result).toBe(104743);
+
   });
-  */
+  
 });
