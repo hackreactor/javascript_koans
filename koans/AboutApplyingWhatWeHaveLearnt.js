@@ -32,16 +32,20 @@ describe("About Applying What We Have Learnt", function() {
         }
     }
 
-    expect(productsICanEat.length).toBe(FILL_ME_IN);
+    expect(productsICanEat.length).toBe(1);
   });
 
   it("given I'm allergic to nuts and hate mushrooms, it should find a pizza I can eat (functional)", function () {
 
       var productsICanEat = [];
-
+	
       /* solve using filter() & all() / any() */
+	  var isMushAndNutFree = function(pizza) {
+		return pizza.ingredients.every(function(v, i, a) { return v != "mushrooms"; }) && !pizza.containsNuts;
+	  };
 
-      expect(productsICanEat.length).toBe(FILL_ME_IN);
+	  productsICanEat = products.filter(isMushAndNutFree);	
+      expect(productsICanEat.length).toBe(1);
   });
 
   /*********************************************************************************/
@@ -55,14 +59,13 @@ describe("About Applying What We Have Learnt", function() {
       }
     }
     
-    expect(sum).toBe(FILL_ME_IN);
+    expect(sum).toBe(233168);
   });
 
   it("should add all the natural numbers below 1000 that are multiples of 3 or 5 (functional)", function () {
+    var sum = _.range(1000).reduce(function(pv, cv) { return (cv % 3 === 0 || cv % 5 === 0) ? pv + cv : pv ;} );
 
-    var sum = FILL_ME_IN;    /* try chaining range() and reduce() */
-
-    expect(233168).toBe(FILL_ME_IN);
+    expect(233168).toBe(sum);
   });
 
   /*********************************************************************************/
@@ -75,39 +78,117 @@ describe("About Applying What We Have Learnt", function() {
         }
     }
 
-    expect(ingredientCount['mushrooms']).toBe(FILL_ME_IN);
+    expect(ingredientCount['mushrooms']).toBe(2);
   });
 
   it("should count the ingredient occurrence (functional)", function () {
     var ingredientCount = { "{ingredient name}": 0 };
 
     /* chain() together map(), flatten() and reduce() */
-
-    expect(ingredientCount['mushrooms']).toBe(FILL_ME_IN);
+	_(products).chain()
+	.map(function(product) { return product.ingredients; })
+	.flatten()
+	.reduce(function(pv, cv) { 
+		!!pv[cv] ? pv[cv]++ : pv[cv] = 1; 
+		return pv; 
+	}, ingredientCount);
+	
+	expect(ingredientCount['mushrooms']).toBe(2);
   });
 
   /*********************************************************************************/
   /* UNCOMMENT FOR EXTRA CREDIT */
-  /*
-  it("should find the largest prime factor of a composite number", function () {
   
+  it("should find the largest prime factor of a composite number", function () {
+	function isPrime(num) { 
+  
+		if (num < 2) return false;
+		for (var i = 2; i <= Math.sqrt(num); i++) {
+			if ((num / i) % 1 == 0) return false;
+		}
+		return true;
+         
+	}
+	
+	function largestPrimeFactor(num) {
+		var lPF = 0;
+		for (var i = 2; i < num; i++) {
+			if (isPrime(i) && ((num / i) % 1 === 0)) lPF = i;
+		}
+		return lPF;
+	}
+	
+	expect(largestPrimeFactor(26)).toBe(13);
   });
 
   it("should find the largest palindrome made from the product of two 3 digit numbers", function () {
-    
+    var largestNumPal = -1;
+	function isPalindrome(str) {
+		if (str.split("").reverse().join("") === str) return true;
+		return false;
+	}
+	for (var i = 100; i < 1000; i++) {
+		for (var j = 100; j < 1000; j++) {
+			var product = i * j;
+			if (isPalindrome(product.toString()) && product > largestNumPal) largestNumPal = product;
+		}
+	}
+	expect(906609).toBe(largestNumPal);
   });
 
   it("should find the smallest number divisible by each of the numbers 1 to 20", function () {
-      
-    
+	function isPrime(num) { 
+		if (num < 2) return false;
+		for (var i = 2; i <= Math.sqrt(num); i++) {
+			if ((num / i) % 1 == 0) return false;
+		}
+		return true;
+	}
+	function getMinProductOfRange(range) {
+		var product = 1;
+		var primes = _.range(21).filter(isPrime);
+		var prime_powers = Array.apply(null, new Array(primes.length)).map(Number.prototype.valueOf, 0);
+		for (var i = range; i > 0; i--) {
+			for (var j = 0; j < primes.length; j++) {
+				var count = 0, iVal = i;
+				while ((iVal / primes[j]) % 1 === 0) {
+					count++;
+					iVal /= primes[j];
+				}
+				if (prime_powers[j] < count) prime_powers[j] = count;
+			}
+		}
+		for (var i = 0; i < primes.length; i++) {
+			product *= Math.pow(primes[i], prime_powers[i]);
+			console.log(product);
+		}
+
+		return product;
+	}
+	
+    expect(232792560).toBe(getMinProductOfRange(20));
   });
 
   it("should find the difference between the sum of the squares and the square of the sums", function () {
-    
+    function diffSS(num1, num2) {
+		var sumOfS = Math.pow(num1, 2) + Math.pow(num2, 2), squareOfS = Math.pow(num1 + num2, 2);
+		return sumOfS - squareOfS;
+	}
+	
+	expect(diffSS(4, 5)).toBe(-40);
   });
 
   it("should find the 10001st prime", function () {
-
+	function isPrime(num) { 
+		if (num < 2) return false;
+		for (var i = 2; i <= Math.sqrt(num); i++) {
+			if ((num / i) % 1 == 0) return false;
+		}
+		return true;
+	}
+	var count = 0, curr = 0;
+	while (count < 10001) if (isPrime(++curr)) count++;
+	expect(curr).toBe(104743);
   });
-  */
+  
 });
