@@ -32,7 +32,7 @@ describe("About Applying What We Have Learnt", function() {
         }
     }
 
-    expect(productsICanEat.length).toBe(FILL_ME_IN);
+    expect(productsICanEat.length).toBe(1);
   });
 
   it("given I'm allergic to nuts and hate mushrooms, it should find a pizza I can eat (functional)", function () {
@@ -40,8 +40,19 @@ describe("About Applying What We Have Learnt", function() {
       var productsICanEat = [];
 
       /* solve using filter() & all() / any() */
-
-      expect(productsICanEat.length).toBe(FILL_ME_IN);
+	  var containsMushrooms = function(ingredient){
+		return ingredient !== "mushrooms";
+	  }
+	  
+	  _.filter(products, function(pizza){
+		if(pizza.containsNuts === false){
+			if(_(pizza.ingredients).all(containsMushrooms)){
+				productsICanEat.push(pizza);
+			}
+		}			
+	  });
+	  
+      expect(productsICanEat.length).toBe(1);
   });
 
   /*********************************************************************************/
@@ -55,14 +66,18 @@ describe("About Applying What We Have Learnt", function() {
       }
     }
     
-    expect(sum).toBe(FILL_ME_IN);
+    expect(sum).toBe(233168);
   });
 
   it("should add all the natural numbers below 1000 that are multiples of 3 or 5 (functional)", function () {
-
-    var sum = FILL_ME_IN;    /* try chaining range() and reduce() */
-
-    expect(233168).toBe(FILL_ME_IN);
+    var sum = _.range(0, 1000).reduce(function(sum, x){
+						if(x % 3 === 0 || x % 5 ===0){ 
+							return sum += x;
+						}
+							return sum;
+						}, 0); /* try chaining range() and reduce() */
+	
+    expect(233168).toBe(sum);
   });
 
   /*********************************************************************************/
@@ -75,22 +90,73 @@ describe("About Applying What We Have Learnt", function() {
         }
     }
 
-    expect(ingredientCount['mushrooms']).toBe(FILL_ME_IN);
+    expect(ingredientCount['mushrooms']).toBe(2);
+	
+	var array = [];
+	//console.log(array);
   });
 
   it("should count the ingredient occurrence (functional)", function () {
     var ingredientCount = { "{ingredient name}": 0 };
-
+	
     /* chain() together map(), flatten() and reduce() */
+	_(products).chain().map(function(value){
+		return value.ingredients;
+	}).flatten().reduce(function(number, name){
+		return ingredientCount[name] = (ingredientCount[name] || 0) + 1;
+	},0);	
 
-    expect(ingredientCount['mushrooms']).toBe(FILL_ME_IN);
+    expect(ingredientCount['mushrooms']).toBe(2);
   });
 
   /*********************************************************************************/
   /* UNCOMMENT FOR EXTRA CREDIT */
-  /*
   it("should find the largest prime factor of a composite number", function () {
-  
+	
+	
+	var primeNumbers = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 
+						53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 
+						109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 
+						173, 179, 181, 191, 193, 197, 199];
+	
+	var isPrime = function(n){
+		var primeNumber = true;
+		for(var i = 2; i <= Math.ceil(Math.sqrt(n)); i++){
+			if(n % i == 0){
+				primeNumber = false;
+			}
+		}
+		return primeNumber;
+	};
+	
+	var primeFactor = [];
+	
+	var findFactor = function(n){		
+		var i = 0;
+		var found = false;		
+		
+		while(!found){
+			if(n % primeNumbers[i] == 0){
+				var p1 = primeNumbers[i];				
+				var p2 = n / primeNumbers[i];
+				
+				if(isPrime(p2)){				
+					primeFactor.push(p1);
+					primeFactor.push(p2);
+					found = true;
+				}else{
+					primeFactor.push(p1);
+					findFactor(p2);
+					found = true;
+				}				
+			}
+			i++;
+		}
+		return primeFactor;
+	};
+	findFactor(75);
+	console.log(primeFactor);
+	//expect(findFactor(75)).toBe([3,5,5]);
   });
 
   it("should find the largest palindrome made from the product of two 3 digit numbers", function () {
@@ -109,5 +175,5 @@ describe("About Applying What We Have Learnt", function() {
   it("should find the 10001st prime", function () {
 
   });
-  */
+  
 });
