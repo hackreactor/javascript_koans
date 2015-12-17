@@ -1,4 +1,4 @@
-var _; //globals
+var _; //globals ?????
 
 describe("About Applying What We Have Learnt", function() {
 
@@ -32,16 +32,27 @@ describe("About Applying What We Have Learnt", function() {
         }
     }
 
-    expect(productsICanEat.length).toBe(FILL_ME_IN);
+    expect(productsICanEat.length).toBe(1);
   });
 
   it("given I'm allergic to nuts and hate mushrooms, it should find a pizza I can eat (functional)", function () {
 
       var productsICanEat = [];
+		_(numbers).filter(function (x) { return x % 2 !== 0 })
+		    var isEven = function(x) { return x % 2 === 0 };
+
+    expect(_(onlyEven).any(isEven)).toBe(true);
+	
 
       /* solve using filter() & all() / any() */
-
-      expect(productsICanEat.length).toBe(FILL_ME_IN);
+		var canEat = [];
+		var noNuts = _(products).filter( function (x) {
+			if ( x.containsNuts == "false") {
+			return x;
+			});
+		var noMushrooms = 
+		
+      expect(productsICanEat.length).toBe(1);
   });
 
   /*********************************************************************************/
