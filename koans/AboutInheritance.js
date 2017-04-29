@@ -25,7 +25,8 @@ describe("About inheritance", function() {
   });
   
   it("should be able to call a method on the derived object", function() {
-    expect(this.swedishChef.cook()).toEqual(FILL_ME_IN);
+    expect(this.swedishChef.cook()).toEqual(function() {
+    return "Mmmm soup!";);
   });
   
   it("should be able to call a method on the base object", function() {
