@@ -25,20 +25,20 @@ describe("About inheritance", function() {
   });
   
   it("should be able to call a method on the derived object", function() {
-    expect(this.swedishChef.cook()).toEqual(FILL_ME_IN);
+    expect(this.swedishChef.cook()).toEqual('Mmmm soup!');
   });
   
   it("should be able to call a method on the base object", function() {
-    expect(this.swedishChef.answerNanny()).toEqual(FILL_ME_IN);
+    expect(this.swedishChef.answerNanny()).toEqual('Everything"'"s cool');
   });
   
   it("should set constructor parameters on the base object", function() {
-    expect(this.swedishChef.age).toEqual(FILL_ME_IN);
-    expect(this.swedishChef.hobby).toEqual(FILL_ME_IN);
+    expect(this.swedishChef.age).toEqual(2);
+    expect(this.swedishChef.hobby).toEqual('cooking');
   });
   
   it("should set constructor parameters on the derived object", function() {
-    expect(this.swedishChef.mood).toEqual(FILL_ME_IN);
+    expect(this.swedishChef.mood).toEqual('chillin');
   });
 });
 
