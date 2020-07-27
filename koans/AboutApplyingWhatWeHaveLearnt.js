@@ -64,11 +64,15 @@ describe("About Applying What We Have Learnt", function() {
   it("should add all the natural numbers below 1000 that are multiples of 3 or 5 (functional)", function () {
 
     var sum = [];    /* try chaining range() and reduce() */
-    // Using Reduce() Methode :
-     for(var i =0; i< 1000; i++){
+    // Using Reduce() and range() Methods :
+function reduce(start ,stop){
+
+
+ for(var i =start; i< stop; i++){
  if (i % 3 === 0 || i % 5 === 0){
      sum.push(i);
- }}
+ }}}
+ reduce(0,1000)
  
      var mySum = sum.reduce((currentTotal, arg) =>{
       return arg + currentTotal ;
