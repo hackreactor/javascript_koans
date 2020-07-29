@@ -92,33 +92,113 @@ function reduce(start ,stop){
         }
     }
 
-    expect(ingredientCount['mushrooms']).toBe(FILL_ME_IN);
+    expect(ingredientCount['mushrooms']).toBe(2);
   });
 
   it("should count the ingredient occurrence (functional)", function () {
     var ingredientCount = { "{ingredient name}": 0 };
 
     /* chain() together map(), flatten() and reduce() */
-
-    expect(ingredientCount['mushrooms']).toBe(FILL_ME_IN);
+   var ingredientCount = { "{mushrooms}": 0 };
+    var allIngredients = products.map((ing) => {
+      return ing.ingredients 
+    });
+    var flatten = allIngredients.flat();
+    
+    for( var i=0; i< flatten.length; i++){
+        if( flatten[i] == 'mushrooms'){
+             flatten[i] = 1;
+        }else{
+            flatten[i] = 0;
+        }
+    }
+   
+     ingredientCount = flatten.reduce((totalValue, curr) => {
+         return curr + totalValue;
+     })
+     
+    expect(ingredientCount['mushrooms']).toBe(2);
   });
 
   /*********************************************************************************/
   /* UNCOMMENT FOR EXTRA CREDIT */
-  /*
-  it("should find the largest prime factor of a composite number", function () {
   
+  it("should find the largest prime factor of a composite number", function () {
+    function largestPrimeF(number){
+      if((number== 2) || (number== 3)){
+        return number;
+      }
+      var num,prime ;
+      for(var i= 0; i<= number; i++){
+        num = 1;
+        if( i % 2!=0){
+          var m=i/2;
+          for(j=2;j<=m;j++){
+            if(i %j ==0){
+              num =0; break;
+            }
+          }
+        }
+        if(num ==1 && number%i ==0)
+        {prime= i;}
+      }
+      var myPrime = largestPrimeF();
+      expect(myPrime).tobe(A_NUMBER)
+    }
   });
 
   it("should find the largest palindrome made from the product of two 3 digit numbers", function () {
-    
+    function largestPalindrome(){
+      for ( var i =999; i>100; i++){
+        for(var j=999; j>100; j--){
+          var m=  j*i;
+          if(isPalin(m)){
+            return i*j;
+          }
+        }
+      }
+    }
+    function isPalin(i){
+      return i.toString() == i.toString().split('').reverse().join('');
+    }
+    var result = largestPalindrome();
+    expect(result).tobe(906609)
   });
 
   it("should find the smallest number divisible by each of the numbers 1 to 20", function () {
-      
+    function smallestDiv(limit){
+      var i, n =1;
+      function  largestPow(n,limit){
+        var p,e = 2 ;
+        var largest = n;
+        while((p=math.pow(n,e)) <= limit){
+          largest = p;
+          e = e+1;
+        }
+        return largest;
+      }
+      function isPrime(n){
+        var i, limit = math.ceil(math.sqrt(n));
+        for(i = 3;i <= limit; i=i+2){
+          if(n % 1 === 0){
+            return false
+          }
+        }
+        return true;
+      }
+      for(i=3; i <= limit; i=i+2){
+        if(isPrime(i)){
+          largestPow(i,limit);
+        }
+      }
+
+return n * largestPow(2,limit);  
+  }
+var myResult = smallestDiv(20)
+expect(myResult).tobe(2520)
     
   });
-
+/*
   it("should find the difference between the sum of the squares and the square of the sums", function () {
     
   });
@@ -126,5 +206,5 @@ function reduce(start ,stop){
   it("should find the 10001st prime", function () {
 
   });
-  */
-});
+  
+}); */
