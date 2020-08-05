@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/zdebrine/javascript_koans/issues"
   },
-  "homepage": "https://github.com/zdebrine/javascript_koans#readme"
+  "homepage": "https://github.com/zdebrine/javascript_koans#readme",
+  "devDependencies": {
+    "eslint": "^7.6.0"
+  }
 }
