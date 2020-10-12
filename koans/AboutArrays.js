@@ -11,7 +11,7 @@ describe("About Arrays", function() {
     expect(multiTypeArray[2]).toBe('two');
     expect(multiTypeArray[3]()).toBe(3);
     expect(multiTypeArray[4].value1).toBe(4);
-    expect(multiTypeArray[4]["value2"]).toBe(FILL_ME_IN);
+    expect(multiTypeArray[4]["value2"]).toBe(5);
     expect(multiTypeArray[5][0]).toBe(FILL_ME_IN);
   });
 
