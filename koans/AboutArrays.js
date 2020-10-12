@@ -23,7 +23,7 @@ describe("About Arrays", function() {
     expect(array).toEqual([1]);
     
     array[1] = 2;
-    expect(array).toEqual([1, FILL_ME_IN]);
+    expect(array).toEqual([1, 2]);
     
     array.push(3);
     expect(array).toEqual(FILL_ME_IN);
