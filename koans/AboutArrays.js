@@ -62,7 +62,7 @@ describe("About Arrays", function() {
       refArray[1] = "changed in function";
     }
     passedByReference(array);
-    expect(array[1]).toBe(FILL_ME_IN);
+    expect(array[1]).toBe("changed in fuction");
 
     var assignedArray = array;
     assignedArray[5] = "changed in assignedArray";
