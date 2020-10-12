@@ -52,7 +52,7 @@ describe("About Arrays", function() {
     expect(array.slice(2, 20)).toEqual(['and', 'jelly']);
     expect(array.slice(3, 0)).toEqual([]);
     expect(array.slice(3, 100)).toEqual(['jelly']);
-    expect(array.slice(5, 1)).toEqual(FILL_ME_IN);
+    expect(array.slice(5, 1)).toEqual([]);
   });
 
   it("should know array references", function () {
