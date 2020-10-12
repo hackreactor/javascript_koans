@@ -92,6 +92,6 @@ describe("About Arrays", function() {
     
     var shiftedValue = array.shift();
     expect(shiftedValue).toEqual(3);
-    expect(array).toEqual(FILL_ME_IN);
+    expect(array).toEqual([1, 2]);
   });  
 });
