@@ -47,7 +47,7 @@ describe("About Arrays", function() {
     var array = ["peanut", "butter", "and", "jelly"];
     
     expect(array.slice(0, 1)).toEqual(['peanut']);
-    expect(array.slice(0, 2)).toEqual(FILL_ME_IN);
+    expect(array.slice(0, 2)).toEqual(['peanut', 'butter']);
     expect(array.slice(2, 2)).toEqual(FILL_ME_IN);
     expect(array.slice(2, 20)).toEqual(FILL_ME_IN);
     expect(array.slice(3, 0)).toEqual(FILL_ME_IN);
