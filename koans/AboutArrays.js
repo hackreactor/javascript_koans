@@ -12,7 +12,7 @@ describe("About Arrays", function() {
     expect(multiTypeArray[3]()).toBe(3);
     expect(multiTypeArray[4].value1).toBe(4);
     expect(multiTypeArray[4]["value2"]).toBe(5);
-    expect(multiTypeArray[5][0]).toBe(FILL_ME_IN);
+    expect(multiTypeArray[5][0]).toBe(6);
   });
 
   it("should understand array literals", function () {
