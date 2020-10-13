@@ -12,7 +12,7 @@ describe("About Applying What We Have Learnt", function() {
        { name: "Blue Moon", ingredients: ["blue cheese", "garlic", "walnuts"], containsNuts: true },
        { name: "Taste Of Athens", ingredients: ["spinach", "kalamata olives", "sesame seeds"], containsNuts: true }
     ];
-  });
+  });  
 
   /*********************************************************************************/
 
